@@ -11,7 +11,7 @@ add_action('wp_enqueue_scripts', 'hentai_saga_scripts');
 
 // Add custom font
 function hentai_saga_fonts() {
-    wp_enqueue_style('google-fonts', 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap', array(), null);
+    wp_enqueue_style('google-fonts', 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap', array(), null);
 }
 add_action('wp_enqueue_scripts', 'hentai_saga_fonts');
 
@@ -24,13 +24,19 @@ add_theme_support('html5', array('search-form', 'comment-form', 'comment-list', 
 function hentai_saga_custom_css() {
     echo '<style>
     :root {
-        --font-main: "Inter", sans-serif;
-        --font-mono: "JetBrains Mono", monospace;
+        --font-sans: "Inter", sans-serif;
+        --font-display: "Orbitron", sans-serif;
+        --font-ui: "Rajdhani", sans-serif;
     }
     body {
-        font-family: var(--font-main);
+        font-family: var(--font-sans);
     }
     img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+    }
+    .wp-image-* {
         max-width: 100%;
         height: auto;
     }
