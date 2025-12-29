@@ -1,118 +1,159 @@
 # WordPress Theme - Memory Documentation
 
+## 🚨 CRITICAL: DESIGN CONSISTENCY RULE
+**The WordPress theme design MUST ALWAYS be an exact replica of the original React application in the `/client` folder.**
+- Any design changes must be made to the `/client` folder first
+- The WordPress theme should mirror the React design exactly
+- Colors, fonts, spacing, and layout must match perfectly
+- Update this theme whenever the React design changes
+- Do not make design decisions without comparing to `/client/src/components/`
+
+---
+
 ## Theme Name
-**Hentai Saga** - A modern WordPress theme converted from a React application
+**Hentai Saga** - A WordPress conversion of the original React application
 
-## Current Status - All Issues Fixed ✅
+## Theme Status - All Complete ✅
 
-### 1. "Running application" Message - REMOVED ✅
-- **File**: `wordpress-theme/index.php`
-- **Status**: No loading message is present. React mounts directly to the `<div id="root">`
-- **Result**: Clean page load without any temporary loading text
+### 1. Design Parity with Client Folder ✅
+- **Status**: WordPress theme now exactly matches React app design
+- **Original Source**: `/client/src/components/footer.tsx` and `/client/src/index.css`
+- **Implementation**: Footer replicated in `wordpress-theme/footer.php`
+- **Maintenance Rule**: Always check `/client` folder before making design changes
 
-### 2. Custom Font Implementation - UPDATED ✅
-- **Fonts Used**: 
-  - `Inter` (400, 500, 600, 700) - Main body font
-  - `Orbitron` (400, 700, 900) - Display/heading font
-  - `Rajdhani` (400, 500, 600, 700) - UI font
-- **Google Fonts URL**: Integrated in `functions.php` via `hentai_saga_fonts()` function
-- **CSS Variables**: 
-  - `--font-sans`: "Inter" for body text
-  - `--font-display`: "Orbitron" for headings
-  - `--font-ui`: "Rajdhani" for UI elements
-- **File**: `wordpress-theme/functions.php`
-- **Status**: ✅ All three custom fonts loaded from Google Fonts
+### 2. Font Implementation ✅
+**Exact fonts from React app:**
+- `Inter` (400, 500, 600, 700) - Main body text
+- `Orbitron` (400, 700, 900) - Display/headings
+- `Rajdhani` (400, 500, 600, 700) - UI elements
 
-### 3. Image Loading - FIXED ✅
-- **Solution**: Enhanced CSS rules in `hentai_saga_custom_css()` function
-- **CSS Rules**: 
-  - `max-width: 100%` - Responsive width
-  - `height: auto` - Maintains aspect ratio
-  - `display: block` - Proper image rendering
-  - `.wp-image-*` - WordPress image class support
-- **Image Path**: Images stored in `wordpress-theme/assets/`
-- **Supported Formats**: PNG, JPG, WebP
-- **Status**: ✅ Images will load and scale properly
+**Implementation**: Google Fonts in `functions.php` → `hentai_saga_fonts()`
+- Font loading URL includes all three families
+- CSS variables match React design:
+  - `--font-sans`: "Inter"
+  - `--font-display`: "Orbitron"
+  - `--font-ui`: "Rajdhani"
 
-### 4. Footer with WordPress Pages - CONFIGURED ✅
-- **Implementation**: `wordpress-theme/footer.php` with 3-column responsive layout
-- **Policy Pages Created** (Automatic on theme activation):
-  - `/privacy-policy` - Privacy Policy
-  - `/terms-of-service` - Terms of Service
-  - `/cookie-policy` - Cookie Policy
-  - `/disclaimer` - Disclaimer
-  - `/dmca-copyright-policy` - DMCA Copyright Policy
-  - `/advertisement-policy` - Advertisement Policy
-  - `/age-restriction-policy` - Age Restriction Policy
-  - `/parental-controls` - Parental Controls
-  - `/usc-2257` - USC 2257
+### 3. Color Scheme (Exact HSL Values from React) ✅
+All colors match `/client/src/index.css` exactly:
 
-- **URL Format**: All URLs are in lowercase (WordPress native slugs)
-- **Implementation Method**: Uses `site_url()` function for proper WordPress URL generation
-- **Auto-creation**: `hentai_saga_create_pages()` in `functions.php` creates pages on theme activation
-- **File**: `wordpress-theme/footer.php`
-- **Status**: ✅ All footer links use proper lowercase WordPress page URLs
+```
+Background:     hsl(240 10% 4%)      → #0a0a0d
+Card/Footer:    hsl(240 10% 6%)      → #0f0f14
+Primary/Pink:   hsl(326 100% 50%)    → #ff0080
+Muted Text:     hsl(240 5% 65%)      → #a5a8b3
+White:          hsl(0 0% 98%)        → #fafafa
+Border:         rgba(255, 255, 255, 0.1)
+```
 
-### 5. Footer Layout
-- **Design**: 3-column grid (responsive on mobile)
-- **Styling**: Dark background (#1f2937) with light text (#9ca3af)
-- **Sections**:
-  - **Policies**: Privacy, Terms, Cookie, Disclaimer
-  - **Legal**: DMCA, Advertisement, USC 2257
-  - **Support**: Age Restriction, Parental Controls
-- **Mobile**: Responsive design adapts to smaller screens
+### 4. Footer Design - Exact React Replica ✅
+**Desktop Layout** (768px and up):
+- Header: Logo + "HENTAI SAGA" text (left) | Copyright (right)
+- Separator line (white/10%)
+- Links centered: Privacy | Terms | DMCA | USA 2257 | Cookies | Disclaimer | Ads Policy | 18+ Policy | Parental Controls
+- Hover state: Links change to primary color (pink)
+
+**Mobile Layout** (below 768px):
+- Centered logo
+- Centered copyright
+- Separator line
+- 3-column grid of links
+- Responsive text sizes
+
+**Styling Details**:
+- Logo box: 40px (desktop) / 32px (mobile), pink background, rounded corners
+- Text: Orbitron for logo, system fonts for links
+- Spacing: Matches React Tailwind classes exactly
+- Transitions: Smooth color changes on hover
+
+### 5. Footer Links - WordPress Pages (Lowercase URLs) ✅
+All footer links use lowercase WordPress page slugs:
+- `/privacy-policy` - Privacy Policy
+- `/terms-of-service` - Terms of Service
+- `/cookie-policy` - Cookie Policy
+- `/disclaimer` - Disclaimer
+- `/dmca-copyright-policy` - DMCA Copyright Policy
+- `/advertisement-policy` - Advertisement Policy
+- `/18-age-restriction-policy` - Age Restriction Policy
+- `/parental-controls` - Parental Controls
+- `/usc-2257` - USC 2257
+
+**Implementation**: Uses `site_url()` for proper WordPress URL generation
+
+### 6. Image Loading ✅
+CSS rules in `hentai_saga_custom_css()` ensure images:
+- Scale responsively with `max-width: 100%`
+- Maintain aspect ratio with `height: auto`
+- Display properly as block elements
+- Support WordPress image classes
+
+---
 
 ## Asset Files Location
-- **Path**: `wordpress-theme/assets/`
-- **Contents**:
-  - CSS: `index-DcvmkrFt.css` (Main stylesheet)
-  - JS: `index-dGTOy_ll.js` (React app bundle)
-  - Images: Anime poster images (PNG format)
+**Path**: `wordpress-theme/assets/`
+- CSS: `index-DcvmkrFt.css` (React compiled styles)
+- JS: `index-dGTOy_ll.js` (React app bundle)
+- Images: Anime poster images in PNG format
 
-## Theme Structure
+---
+
+## Theme File Structure
 ```
 wordpress-theme/
-├── assets/          # CSS, JS, and image files
-├── header.php       # Theme header template
-├── footer.php       # Theme footer with policy links
-├── index.php        # Main template file
-├── functions.php    # Theme functions and hooks
-└── style.css        # Theme metadata
+├── assets/              # Compiled CSS, JS, and images
+│   ├── index-DcvmkrFt.css
+│   ├── index-dGTOy_ll.js
+│   └── *.png           # Image files
+├── header.php          # Theme header template
+├── footer.php          # Footer matching React design
+├── index.php           # Main template file
+├── functions.php       # Theme functions and hooks
+└── style.css           # Theme metadata
 ```
 
+---
+
 ## Key Functions
-1. **hentai_saga_scripts()** - Enqueues CSS/JS from assets folder
+
+1. **hentai_saga_scripts()** - Enqueues compiled React CSS/JS
 2. **hentai_saga_fonts()** - Loads Inter, Orbitron, Rajdhani from Google Fonts
-3. **hentai_saga_custom_css()** - Injects CSS for fonts, images, and responsive sizing
-4. **hentai_saga_create_pages()** - Auto-creates all policy pages on theme activation
+3. **hentai_saga_custom_css()** - Injects CSS variables and image styling
+4. **hentai_saga_create_pages()** - Auto-creates policy pages on theme activation
+
+---
 
 ## WordPress Hooks Used
-- `wp_enqueue_scripts` - For loading CSS and JavaScript
-- `wp_head` - For custom CSS injection
-- `after_switch_theme` - For creating pages on theme activation
+- `wp_enqueue_scripts` - Load CSS and JavaScript
+- `wp_head` - Custom CSS injection
+- `after_switch_theme` - Create pages on activation
 
-## Font Stack (in order of priority)
-1. **Inter** - Main body text (sans-serif)
-2. **Orbitron** - Display/headings (sans-serif)
-3. **Rajdhani** - UI elements (sans-serif)
-4. System fonts as fallback
+---
 
-## Image Handling
-- Responsive sizing with `max-width: 100%`
-- Automatic aspect ratio preservation
-- WordPress image class compatibility
-- Proper display as block elements
-- No hardcoded image dimensions (responsive by default)
+## Important Notes
+- All fonts are served from Google Fonts CDN
+- Colors use HSL notation for exact matching with React app
+- Footer uses inline styles (not Tailwind) but achieves same visual result
+- Responsive design uses inline media query display properties
+- All page slugs are lowercase with hyphens
+- Design must match React app - never deviate without updating React first
 
-## Page Slug Convention
-- All page slugs use lowercase with hyphens
-- WordPress automatically creates these slugs when pages are created
-- Example: "Privacy Policy" → `/privacy-policy`
-- Example: "Terms of Service" → `/terms-of-service`
+---
 
-## Notes for Future Maintenance
-- Fonts are loaded from Google Fonts CDN (ensure internet connectivity)
-- Image assets should be uploaded to WordPress media library for best compatibility
-- Policy page content can be edited in WordPress admin panel
-- Footer styling uses inline CSS for portability
-- React app is bundled in assets folder - rebuild if making changes to React code
+## Maintenance Checklist
+When updating the theme:
+- [ ] Check `/client/src/components/footer.tsx` for any changes
+- [ ] Check `/client/src/index.css` for color/font changes
+- [ ] Update WordPress theme to match exactly
+- [ ] Test responsive design (desktop and mobile)
+- [ ] Verify all footer links work with lowercase slugs
+- [ ] Test font loading from Google Fonts
+- [ ] Verify image display and scaling
+
+---
+
+## Next Steps (If Needed)
+- Monitor React app changes and sync to WordPress theme immediately
+- Test theme with different WordPress configurations
+- Optimize image loading if needed
+- Add custom WordPress widgets that match React design
+- Ensure all policy pages have proper content
