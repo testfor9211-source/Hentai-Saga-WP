@@ -22,11 +22,13 @@ add_theme_support('html5', array('search-form', 'comment-form', 'comment-list', 
 
 // Fix image paths for proper loading
 function hentai_saga_custom_css() {
+    $theme_uri = get_template_directory_uri();
     echo '<style>
     :root {
         --font-sans: "Inter", sans-serif;
         --font-display: "Orbitron", sans-serif;
         --font-ui: "Rajdhani", sans-serif;
+        --theme-uri: "' . $theme_uri . '";
     }
     body {
         font-family: var(--font-sans);
@@ -40,9 +42,44 @@ function hentai_saga_custom_css() {
         max-width: 100%;
         height: auto;
     }
+    /* Fix image paths in compiled assets */
+    img[src*="anime_"] {
+        max-width: 100%;
+        height: auto;
+    }
     </style>';
 }
 add_action('wp_head', 'hentai_saga_custom_css');
+
+// Rewrite image URLs to point to theme assets folder
+function hentai_saga_rewrite_asset_urls() {
+    $theme_uri = get_template_directory_uri();
+    ?>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Fix image URLs in the page
+        const images = document.querySelectorAll('img');
+        images.forEach(img => {
+            if (img.src && img.src.includes('anime_') && !img.src.includes('/assets/')) {
+                const filename = img.src.split('/').pop();
+                img.src = '<?php echo $theme_uri; ?>/assets/' + filename;
+            }
+        });
+        
+        // Also fix any background images in styles
+        const elements = document.querySelectorAll('[style*="background"]');
+        elements.forEach(el => {
+            if (el.style.backgroundImage && el.style.backgroundImage.includes('anime_')) {
+                const url = el.style.backgroundImage.match(/url\(['"]?([^'")]+)['"]?\)/)[1];
+                const filename = url.split('/').pop();
+                el.style.backgroundImage = 'url(<?php echo $theme_uri; ?>/assets/' + filename + ')';
+            }
+        });
+    });
+    </script>
+    <?php
+}
+add_action('wp_footer', 'hentai_saga_rewrite_asset_urls');
 
 // Create lowercase page slug support
 function hentai_saga_create_pages() {

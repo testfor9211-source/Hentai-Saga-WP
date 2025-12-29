@@ -46,25 +46,19 @@ White:          hsl(0 0% 98%)        → #fafafa
 Border:         rgba(255, 255, 255, 0.1)
 ```
 
-### 4. Footer Design - Exact React Replica ✅
-**Desktop Layout** (768px and up):
-- Header: Logo + "HENTAI SAGA" text (left) | Copyright (right)
-- Separator line (white/10%)
-- Links centered: Privacy | Terms | DMCA | USA 2257 | Cookies | Disclaimer | Ads Policy | 18+ Policy | Parental Controls
-- Hover state: Links change to primary color (pink)
+### 4. Footer Design - Handled by React App ✅
+**Important**: The footer is rendered by the React app itself, not by WordPress PHP.
+- React component: `/client/src/components/footer.tsx`
+- WordPress footer.php is minimal - only contains WordPress hooks (`wp_footer()`)
+- This prevents duplicate footers from appearing
+- Footer styling, layout, and design come entirely from the React application
 
-**Mobile Layout** (below 768px):
-- Centered logo
-- Centered copyright
-- Separator line
-- 3-column grid of links
-- Responsive text sizes
-
-**Styling Details**:
-- Logo box: 40px (desktop) / 32px (mobile), pink background, rounded corners
-- Text: Orbitron for logo, system fonts for links
-- Spacing: Matches React Tailwind classes exactly
-- Transitions: Smooth color changes on hover
+**Design Details** (from React component):
+- Desktop Layout: Logo + text on left, copyright on right, centered links
+- Mobile Layout: Centered logo, 3-column grid of links
+- Logo: 40px (desktop) / 32px (mobile), pink background, Orbitron font
+- All links use proper WordPress lowercase page URLs
+- Hover state: Links change to primary pink color
 
 ### 5. Footer Links - WordPress Pages (Lowercase URLs) ✅
 All footer links use lowercase WordPress page slugs:
@@ -81,11 +75,18 @@ All footer links use lowercase WordPress page slugs:
 **Implementation**: Uses `site_url()` for proper WordPress URL generation
 
 ### 6. Image Loading ✅
-CSS rules in `hentai_saga_custom_css()` ensure images:
-- Scale responsively with `max-width: 100%`
-- Maintain aspect ratio with `height: auto`
-- Display properly as block elements
-- Support WordPress image classes
+**Fixed with automatic URL rewriting:**
+- Images in `/wordpress-theme/assets/` are accessible
+- JavaScript function `hentai_saga_rewrite_asset_urls()` automatically fixes image paths
+- Rewrites incorrect image URLs to point to theme assets folder
+- Handles both regular `<img>` tags and CSS `background-image` properties
+- Runs on page load via `DOMContentLoaded` event
+
+**How it works**:
+1. React app tries to load images with certain paths
+2. WordPress function detects images with names like "anime_*.png"
+3. Automatically rewrites URLs to: `<?php echo get_template_directory_uri(); ?>/assets/filename.png`
+4. Images now load correctly from theme assets folder
 
 ---
 
