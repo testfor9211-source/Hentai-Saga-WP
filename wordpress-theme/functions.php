@@ -3,6 +3,9 @@
  * Theme functions and definitions
  */
 
+// Load customizer settings
+require_once get_template_directory() . '/customizer.php';
+
 function hentai_saga_scripts() {
     wp_enqueue_style('hentai-saga-styles', get_template_directory_uri() . '/assets/index-DcvmkrFt.css');
     wp_enqueue_script('hentai-saga-js', get_template_directory_uri() . '/assets/index-dGTOy_ll.js', array(), null, true);

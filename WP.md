@@ -149,6 +149,65 @@ wordpress-theme/
 2. **hentai_saga_fonts()** - Loads Inter, Orbitron, Rajdhani from Google Fonts
 3. **hentai_saga_custom_css()** - Injects CSS variables and image styling
 4. **hentai_saga_create_pages()** - Auto-creates policy pages on theme activation
+5. **hentai_saga_customize_register()** - Registers customizer settings for header/footer
+6. **hentai_saga_get_footer_link($key)** - Gets footer link by key
+7. **hentai_saga_get_all_footer_links()** - Gets all footer links
+
+## Admin Customizer Settings
+
+**How to Access:**
+1. Go to WordPress Dashboard
+2. Click on **Appearance** → **Customize**
+3. You'll see two new panels:
+   - **Hentai Saga - Header Settings**
+   - **Hentai Saga - Footer Settings**
+
+### Header Settings (customizer.php):
+- **Header Logo Text** - Main logo text displayed in header (default: "HENTAI SAGA")
+- **Header Logo URL** - URL the logo links to when clicked (default: homepage)
+
+### Footer Settings (customizer.php):
+- **Footer Logo Text** - Text shown in footer logo area (default: "HENTAI SAGA")
+- **Footer Copyright Text** - Copyright notice (default: "© 2025 Hentai Saga. All rights reserved.")
+
+### Footer Links - 9 Customizable Links:
+For each link you can customize:
+- **Link Text** - The display text
+- **Link URL** - The destination URL
+
+Available footer links:
+1. Privacy Policy
+2. Terms of Service
+3. DMCA Copyright Policy
+4. USC 2257
+5. Cookie Policy
+6. Disclaimer
+7. Advertisement Policy
+8. Age Restriction Policy
+9. Parental Controls
+
+**Example Use Case:**
+- Change "Privacy Policy" text to "Privacy"
+- Change "Advertisement Policy" URL to your custom page
+- Hide a link by leaving it blank (won't display if text is empty)
+- Add new URLs or domains as needed
+
+### Theme Files Structure:
+- **customizer.php** - All customizer settings and helper functions
+- **header.php** - Uses customizer settings for logo text and URL
+- **footer.php** - Uses customizer settings for footer content
+- **functions.php** - Loads the customizer.php file
+
+### Helper Functions:
+```php
+// Get a single footer link by key
+$link = hentai_saga_get_footer_link('privacy');
+// Returns: ['text' => 'Privacy Policy', 'url' => 'https://...']
+
+// Get all footer links
+$links = hentai_saga_get_all_footer_links();
+// Returns array of all active footer links
+```
 
 ---
 
