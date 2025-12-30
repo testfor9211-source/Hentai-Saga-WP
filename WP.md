@@ -74,28 +74,42 @@ All footer links use lowercase WordPress page slugs:
 
 **Implementation**: Uses `site_url()` for proper WordPress URL generation
 
-### 6. Image Loading ✅
-**Fixed with automatic URL rewriting to WordPress uploads folder:**
+### 6. Image Loading & Sizing ✅
+**Fixed with automatic URL rewriting AND CSS aspect ratio rules:**
 - All images should be uploaded to: `/wp-content/uploads/` (WordPress default)
 - JavaScript function `hentai_saga_rewrite_asset_urls()` automatically fixes image paths
-- Rewrites all image URLs to point to `/wp-content/uploads/` folder
+- CSS rules ensure proper aspect ratio and sizing (matches React's `object-cover`)
 - Handles:
-  - Regular `<img>` tags
+  - Regular `<img>` tags with `object-fit: cover`
   - CSS `background-image` properties in inline styles
   - CSS background images in stylesheets
+  - Hero/banner images with proper aspect ratio preservation
 - Runs on page load via `DOMContentLoaded` event
+
+**CSS Image Sizing Rules Applied**:
+```css
+img[src*="hero"], img[src*="banner"] {
+    object-fit: cover;    /* Maintains aspect ratio */
+    width: 100%;          /* Full width */
+    height: 100%;         /* Full height */
+}
+img[alt*="Hero"] {
+    object-fit: cover;    /* Covers entire container */
+}
+```
 
 **How it works**:
 1. React app tries to load images with paths like "anime_poster_*.png"
 2. WordPress function detects images with names containing "anime_"
 3. Automatically rewrites URLs to: `/wp-content/uploads/filename.png`
-4. Uses WordPress `wp_upload_dir()` to get correct uploads URL
+4. CSS applies `object-fit: cover` to maintain aspect ratio (same as React)
+5. Uses WordPress `wp_upload_dir()` to get correct uploads URL
 
 **Setup Instructions**:
 1. Go to WordPress Dashboard → Media
 2. Upload all anime poster images (anime_hero_banner_*.png, anime_poster_*.png, etc.)
 3. Images will be stored in `/wp-content/uploads/`
-4. The website will automatically find and display them
+4. Website automatically finds, displays, and sizes them correctly with proper aspect ratio
 
 ---
 

@@ -47,6 +47,28 @@ function hentai_saga_custom_css() {
         max-width: 100%;
         height: auto;
     }
+    /* Hero background image fix - object-fit: cover for proper aspect ratio */
+    img[src*="hero"] {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+    img[src*="banner"] {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+    /* Ensure images in containers maintain proper aspect ratio */
+    img[alt*="Hero"] {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+    /* Background images sizing */
+    img[src*="anime_poster"], img[src*="anime_hero"] {
+        object-fit: cover;
+        object-position: center;
+    }
     </style>';
 }
 add_action('wp_head', 'hentai_saga_custom_css');
