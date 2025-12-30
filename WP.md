@@ -136,10 +136,11 @@ wordpress-theme/
 ```
 
 **File Responsibilities**:
-- **header.php**: Complete HTML head section, body opening, WordPress hooks
-- **footer.php**: WordPress footer hook, closing body/html tags
-- **index.php**: Main content area (React app mount point)
+- **header.php**: Minimal boilerplate only (<!DOCTYPE>, wp_head, wp_body_open) - React renders navbar
+- **footer.php**: Minimal boilerplate only (wp_footer, closing tags) - React renders footer
+- **index.php**: Clean page content with just React mount point (#root)
 - **functions.php**: Theme setup, font loading, image handling, CSS/JS enqueuing
+- **customizer.php**: Settings for header/footer customization (data available to React or PHP)
 
 ---
 
