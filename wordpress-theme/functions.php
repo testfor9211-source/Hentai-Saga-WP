@@ -51,18 +51,19 @@ function hentai_saga_custom_css() {
 }
 add_action('wp_head', 'hentai_saga_custom_css');
 
-// Rewrite image URLs to point to theme assets folder
+// Rewrite image URLs to point to WordPress uploads folder
 function hentai_saga_rewrite_asset_urls() {
-    $theme_uri = get_template_directory_uri();
+    $upload_dir = wp_upload_dir();
+    $uploads_url = $upload_dir['baseurl'];
     ?>
     <script>
     document.addEventListener("DOMContentLoaded", function() {
-        // Fix image URLs in the page
+        // Fix image URLs in the page - rewrite to WordPress uploads folder
         const images = document.querySelectorAll('img');
         images.forEach(img => {
-            if (img.src && img.src.includes('anime_') && !img.src.includes('/assets/')) {
+            if (img.src && img.src.includes('anime_')) {
                 const filename = img.src.split('/').pop();
-                img.src = '<?php echo $theme_uri; ?>/assets/' + filename;
+                img.src = '<?php echo $uploads_url; ?>/' + filename;
             }
         });
         
@@ -72,9 +73,27 @@ function hentai_saga_rewrite_asset_urls() {
             if (el.style.backgroundImage && el.style.backgroundImage.includes('anime_')) {
                 const url = el.style.backgroundImage.match(/url\(['"]?([^'")]+)['"]?\)/)[1];
                 const filename = url.split('/').pop();
-                el.style.backgroundImage = 'url(<?php echo $theme_uri; ?>/assets/' + filename + ')';
+                el.style.backgroundImage = 'url(<?php echo $uploads_url; ?>/' + filename + ')';
             }
         });
+        
+        // Fix any images in CSS that reference anime files
+        const styleSheets = document.styleSheets;
+        for (let i = 0; i < styleSheets.length; i++) {
+            try {
+                const rules = styleSheets[i].cssRules || styleSheets[i].rules;
+                for (let j = 0; j < rules.length; j++) {
+                    const rule = rules[j];
+                    if (rule.style && rule.style.backgroundImage && rule.style.backgroundImage.includes('anime_')) {
+                        const url = rule.style.backgroundImage.match(/url\(['"]?([^'")]+)['"]?\)/)[1];
+                        const filename = url.split('/').pop();
+                        rule.style.backgroundImage = 'url(<?php echo $uploads_url; ?>/' + filename + ')';
+                    }
+                }
+            } catch (e) {
+                // Skip stylesheets we can't access (external, cross-origin, etc)
+            }
+        }
     });
     </script>
     <?php

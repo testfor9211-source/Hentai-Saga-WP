@@ -75,18 +75,27 @@ All footer links use lowercase WordPress page slugs:
 **Implementation**: Uses `site_url()` for proper WordPress URL generation
 
 ### 6. Image Loading ✅
-**Fixed with automatic URL rewriting:**
-- Images in `/wordpress-theme/assets/` are accessible
+**Fixed with automatic URL rewriting to WordPress uploads folder:**
+- All images should be uploaded to: `/wp-content/uploads/` (WordPress default)
 - JavaScript function `hentai_saga_rewrite_asset_urls()` automatically fixes image paths
-- Rewrites incorrect image URLs to point to theme assets folder
-- Handles both regular `<img>` tags and CSS `background-image` properties
+- Rewrites all image URLs to point to `/wp-content/uploads/` folder
+- Handles:
+  - Regular `<img>` tags
+  - CSS `background-image` properties in inline styles
+  - CSS background images in stylesheets
 - Runs on page load via `DOMContentLoaded` event
 
 **How it works**:
-1. React app tries to load images with certain paths
-2. WordPress function detects images with names like "anime_*.png"
-3. Automatically rewrites URLs to: `<?php echo get_template_directory_uri(); ?>/assets/filename.png`
-4. Images now load correctly from theme assets folder
+1. React app tries to load images with paths like "anime_poster_*.png"
+2. WordPress function detects images with names containing "anime_"
+3. Automatically rewrites URLs to: `/wp-content/uploads/filename.png`
+4. Uses WordPress `wp_upload_dir()` to get correct uploads URL
+
+**Setup Instructions**:
+1. Go to WordPress Dashboard → Media
+2. Upload all anime poster images (anime_hero_banner_*.png, anime_poster_*.png, etc.)
+3. Images will be stored in `/wp-content/uploads/`
+4. The website will automatically find and display them
 
 ---
 
