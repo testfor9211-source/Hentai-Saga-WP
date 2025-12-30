@@ -128,12 +128,18 @@ wordpress-theme/
 │   ├── index-DcvmkrFt.css
 │   ├── index-dGTOy_ll.js
 │   └── *.png           # Image files
-├── header.php          # Theme header template
-├── footer.php          # Footer matching React design
-├── index.php           # Main template file
+├── header.php          # HTML head, body open, wp_head() hook
+├── footer.php          # wp_footer() hook, body close, html close
+├── index.php           # Main page template with React mount point
 ├── functions.php       # Theme functions and hooks
 └── style.css           # Theme metadata
 ```
+
+**File Responsibilities**:
+- **header.php**: Complete HTML head section, body opening, WordPress hooks
+- **footer.php**: WordPress footer hook, closing body/html tags
+- **index.php**: Main content area (React app mount point)
+- **functions.php**: Theme setup, font loading, image handling, CSS/JS enqueuing
 
 ---
 

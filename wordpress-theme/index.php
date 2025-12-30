@@ -1,12 +1,13 @@
 <?php
 /**
- * Main template file
+ * Main Theme Template File
+ * Displays the main page content area where React app mounts
  */
 
 get_header(); ?>
 
 <div id="root">
-    <!-- React will mount here -->
+    <!-- React Application Mount Point -->
 </div>
 
 <?php get_footer(); ?>

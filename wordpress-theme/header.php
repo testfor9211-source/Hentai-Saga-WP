@@ -1,3 +1,9 @@
+<?php
+/**
+ * Theme Header Template
+ * Displays the header and opening HTML structure
+ */
+?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
