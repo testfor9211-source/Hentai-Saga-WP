@@ -136,11 +136,11 @@ wordpress-theme/
 ```
 
 **File Responsibilities**:
-- **header.php**: Minimal boilerplate only (<!DOCTYPE>, wp_head, wp_body_open) - React renders navbar
-- **footer.php**: Minimal boilerplate only (wp_footer, closing tags) - React renders footer
-- **index.php**: Clean page content with just React mount point (#root)
-- **functions.php**: Theme setup, font loading, image handling, CSS/JS enqueuing
-- **customizer.php**: Settings for header/footer customization (data available to React or PHP)
+- **header.php**: Complete navbar with HTML/CSS (logo, menu, search) + customizer integration
+- **footer.php**: Complete footer with HTML/CSS (logo, copyright, all policy links) + customizer integration
+- **index.php**: Page content with React mount point (#root) for dynamic functionality
+- **functions.php**: Theme setup, font loading, image handling, CSS/JS enqueuing, customizer registration
+- **customizer.php**: Helper functions for getting customizer settings
 
 ---
 
