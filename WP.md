@@ -128,19 +128,12 @@ wordpress-theme/
 │   ├── index-DcvmkrFt.css
 │   ├── index-dGTOy_ll.js
 │   └── *.png           # Image files
-├── header.php          # HTML head, body open, wp_head() hook
-├── footer.php          # wp_footer() hook, body close, html close
-├── index.php           # Main page template with React mount point
+├── header.php          # Theme header template
+├── footer.php          # Footer matching React design
+├── index.php           # Main template file
 ├── functions.php       # Theme functions and hooks
 └── style.css           # Theme metadata
 ```
-
-**File Responsibilities**:
-- **header.php**: Complete navbar with HTML/CSS (logo, menu, search) + customizer integration
-- **footer.php**: Complete footer with HTML/CSS (logo, copyright, all policy links) + customizer integration
-- **index.php**: Page content with React mount point (#root) for dynamic functionality
-- **functions.php**: Theme setup, font loading, image handling, CSS/JS enqueuing, customizer registration
-- **customizer.php**: Helper functions for getting customizer settings
 
 ---
 
@@ -150,75 +143,6 @@ wordpress-theme/
 2. **hentai_saga_fonts()** - Loads Inter, Orbitron, Rajdhani from Google Fonts
 3. **hentai_saga_custom_css()** - Injects CSS variables and image styling
 4. **hentai_saga_create_pages()** - Auto-creates policy pages on theme activation
-5. **hentai_saga_customize_register()** - Registers customizer settings (in functions.php, line 10-90)
-6. **hentai_saga_get_footer_link($key)** - Gets individual footer link settings
-7. **hentai_saga_get_all_footer_links()** - Gets all footer links for display
-
-## Customizer Architecture
-
-The customizer is now implemented in **functions.php** with:
-- Settings registered via `add_setting()` 
-- Controls registered via `add_control()`
-- Hook attached: `add_action('customize_register', 'hentai_saga_customize_register')`
-- Helper functions in **customizer.php** to retrieve saved values
-
-This ensures the customizer loads properly at the right time.
-
-## Admin Customizer Settings
-
-**How to Access:**
-1. Go to WordPress Dashboard
-2. Click on **Appearance** → **Customize**
-3. You'll see two new panels:
-   - **Hentai Saga - Header Settings**
-   - **Hentai Saga - Footer Settings**
-
-### Header Settings (customizer.php):
-- **Header Logo Text** - Main logo text displayed in header (default: "HENTAI SAGA")
-- **Header Logo URL** - URL the logo links to when clicked (default: homepage)
-
-### Footer Settings (customizer.php):
-- **Footer Logo Text** - Text shown in footer logo area (default: "HENTAI SAGA")
-- **Footer Copyright Text** - Copyright notice (default: "© 2025 Hentai Saga. All rights reserved.")
-
-### Footer Links - 9 Customizable Links:
-For each link you can customize:
-- **Link Text** - The display text
-- **Link URL** - The destination URL
-
-Available footer links:
-1. Privacy Policy
-2. Terms of Service
-3. DMCA Copyright Policy
-4. USC 2257
-5. Cookie Policy
-6. Disclaimer
-7. Advertisement Policy
-8. Age Restriction Policy
-9. Parental Controls
-
-**Example Use Case:**
-- Change "Privacy Policy" text to "Privacy"
-- Change "Advertisement Policy" URL to your custom page
-- Hide a link by leaving it blank (won't display if text is empty)
-- Add new URLs or domains as needed
-
-### Theme Files Structure:
-- **customizer.php** - All customizer settings and helper functions
-- **header.php** - Uses customizer settings for logo text and URL
-- **footer.php** - Uses customizer settings for footer content
-- **functions.php** - Loads the customizer.php file
-
-### Helper Functions:
-```php
-// Get a single footer link by key
-$link = hentai_saga_get_footer_link('privacy');
-// Returns: ['text' => 'Privacy Policy', 'url' => 'https://...']
-
-// Get all footer links
-$links = hentai_saga_get_all_footer_links();
-// Returns array of all active footer links
-```
 
 ---
 
