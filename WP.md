@@ -150,9 +150,19 @@ wordpress-theme/
 2. **hentai_saga_fonts()** - Loads Inter, Orbitron, Rajdhani from Google Fonts
 3. **hentai_saga_custom_css()** - Injects CSS variables and image styling
 4. **hentai_saga_create_pages()** - Auto-creates policy pages on theme activation
-5. **hentai_saga_customize_register()** - Registers customizer settings for header/footer
-6. **hentai_saga_get_footer_link($key)** - Gets footer link by key
-7. **hentai_saga_get_all_footer_links()** - Gets all footer links
+5. **hentai_saga_customize_register()** - Registers customizer settings (in functions.php, line 10-90)
+6. **hentai_saga_get_footer_link($key)** - Gets individual footer link settings
+7. **hentai_saga_get_all_footer_links()** - Gets all footer links for display
+
+## Customizer Architecture
+
+The customizer is now implemented in **functions.php** with:
+- Settings registered via `add_setting()` 
+- Controls registered via `add_control()`
+- Hook attached: `add_action('customize_register', 'hentai_saga_customize_register')`
+- Helper functions in **customizer.php** to retrieve saved values
+
+This ensures the customizer loads properly at the right time.
 
 ## Admin Customizer Settings
 
