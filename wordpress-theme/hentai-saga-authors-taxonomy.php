@@ -3,7 +3,7 @@
  * Plugin Name: Hentai Saga Authors Taxonomy
  * Plugin URI: https://hentaisaga.xxx
  * Description: Adds a custom hierarchical Authors taxonomy for Posts, exactly like Categories
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: Hentai Saga Team
  * Author URI: https://hentaisaga.xxx
  * License: GPL v2 or later
@@ -70,7 +70,7 @@ function hentai_saga_register_authors_taxonomy() {
             'show_tagcloud'         => true, // Show tag cloud
             'show_in_quick_edit'    => true, // Show in quick edit
             'show_admin_column'     => true, // Show in posts list table
-            'meta_box_cb'           => null, // Use default meta box (checkbox interface)
+            'meta_box_cb'           => 'post_categories_meta_box', // Use the hierarchical category metabox interface
             
             // REST API / Gutenberg support
             'show_in_rest'          => true,

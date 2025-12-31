@@ -188,8 +188,8 @@ When updating the theme:
 - Hierarchical (supports parent/child authors)
 - Appears under Posts in WordPress admin menu
 - Identical UI to Categories (Add/Edit/Delete interface)
-- Selectable in post editor (checkbox interface like Categories and Tags)
-- Full REST API/Gutenberg support
+- Selectable in post editor (checkbox interface like Categories)
+- **Gutenberg Support**: Enabled and fixed to show in sidebar
 - Yoast SEO compatible
 - Archive URLs: `/author/author-name/`
 - Automatic rewrite rule generation
