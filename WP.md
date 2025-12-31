@@ -175,6 +175,67 @@ When updating the theme:
 
 ---
 
+---
+
+## Plugins Installed
+
+### 1. Hentai Saga Authors Taxonomy Plugin ✅
+**File**: `wordpress-theme/hentai-saga-authors-taxonomy.php`
+
+**Purpose**: Adds a custom hierarchical "Authors" taxonomy that works exactly like Categories
+
+**Features**:
+- Hierarchical (supports parent/child authors)
+- Appears under Posts in WordPress admin menu
+- Identical UI to Categories (Add/Edit/Delete interface)
+- Selectable in post editor (checkbox interface like Categories and Tags)
+- Full REST API/Gutenberg support
+- Yoast SEO compatible
+- Archive URLs: `/author/author-name/`
+- Automatic rewrite rule generation
+
+**Installation Instructions**:
+1. Go to WordPress Dashboard → Plugins → Add New
+2. Upload the `hentai-saga-authors-taxonomy.php` file
+3. Activate the plugin
+4. New "Authors" menu item appears below Posts (under Tags)
+5. Start adding authors and assigning them to posts
+
+**How to Use**:
+1. **Add New Author**:
+   - Go to Posts → Authors
+   - Click "Add New Author"
+   - Fill in author name and description
+   - Optional: Assign to parent author for hierarchy
+
+2. **Assign Author to Post**:
+   - Edit or create a post
+   - Look for "Authors" box on right sidebar (like Categories)
+   - Select author(s) with checkboxes
+   - Publish the post
+
+3. **View Author Archive**:
+   - Visit: `/author/author-slug/`
+   - Shows all posts assigned to that author
+
+**Technical Details**:
+- Taxonomy Slug: `authors`
+- Archive Slug: `author`
+- Hierarchical: Yes (like Categories, not Tags)
+- Public: Yes (indexed by search engines)
+- REST API: Enabled (`show_in_rest = true`)
+- Yoast SEO: Automatically detected
+- Capabilities: Uses standard post editing capabilities
+
+**Why This Plugin?**
+- More organized than Tags
+- Supports hierarchies (main author → contributor)
+- Better for content attribution
+- Yoast SEO treats author archives as indexable
+- No duplicate content issues
+
+---
+
 ## Next Steps (If Needed)
 - Monitor React app changes and sync to WordPress theme immediately
 - Test theme with different WordPress configurations
