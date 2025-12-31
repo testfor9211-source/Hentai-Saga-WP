@@ -153,6 +153,17 @@ function hentai_saga_authors_archive_indexable() {
 add_action( 'wp', 'hentai_saga_authors_archive_indexable' );
 
 /**
+ * Enable Yoast SEO Primary Term for Authors
+ */
+function hentai_saga_authors_yoast_primary_term( $taxonomies, $post_type, $all_taxonomies ) {
+    if ( $post_type === 'post' && isset( $all_taxonomies['authors'] ) ) {
+        $taxonomies['authors'] = $all_taxonomies['authors'];
+    }
+    return $taxonomies;
+}
+add_filter( 'wpseo_primary_term_taxonomies', 'hentai_saga_authors_yoast_primary_term', 10, 3 );
+
+/**
  * Plugin Activation Hook
  *
  * Flushes rewrite rules on activation to create proper permalinks.

@@ -190,7 +190,10 @@ When updating the theme:
 - Identical UI to Categories (Add/Edit/Delete interface)
 - Selectable in post editor (checkbox interface like Categories)
 - **Gutenberg Support**: Enabled and fixed to show in sidebar
-- Yoast SEO compatible
+- **Yoast SEO Compatible**:
+  - Automatically detected as accessible taxonomy
+  - Archive pages set to indexable
+  - **Primary Term support enabled** (select a "Main Author" for SEO)
 - Archive URLs: `/author/author-name/`
 - Automatic rewrite rule generation
 
