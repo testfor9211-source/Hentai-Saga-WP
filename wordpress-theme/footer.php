@@ -1,18 +1,17 @@
 <?php
 /**
  * Theme Footer Template
- * Complete footer with logo, copyright, and policy links
+ * Exact replica of React footer component with customizer settings
  */
 ?>
 
-<!-- Footer Navigation -->
-<footer style="border-top: 1px solid rgba(255, 255, 255, 0.1); background-color: hsl(240, 10%, 6%); margin-top: 48px;">
+<footer style="border-top: 1px solid rgba(255, 255, 255, 0.1); background-color: #0d0a1b; margin-top: 48px;">
     <div style="max-width: 1200px; margin: 0 auto; padding: 0 16px;">
         
         <!-- Desktop Footer -->
-        <div style="display: none; @media(min-width: 768px) { display: block; } padding: 40px 0;">
+        <div style="display: block; padding: 40px 0;" class="md:block">
             <div style="display: flex; flex-direction: column; gap: 24px;">
-                <!-- Header with Logo and Copyright -->
+                <!-- Logo and Copyright Section -->
                 <div style="display: flex; align-items: center; justify-content: space-between;">
                     <div style="display: flex; align-items: center; gap: 12px;">
                         <div style="width: 40px; height: 40px; background-color: #ff00ff; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-family: 'Orbitron', sans-serif; font-weight: bold; font-size: 20px;">
@@ -22,7 +21,7 @@
                             <?php echo esc_html(get_theme_mod('hentai_saga_footer_text', 'HENTAI SAGA')); ?>
                         </span>
                     </div>
-                    <p style="color: hsl(240, 5%, 65%); font-size: 14px;">
+                    <p style="color: #a0a0a0; font-size: 14px;">
                         <?php echo esc_html(get_theme_mod('hentai_saga_footer_copyright', '© 2025 Hentai Saga. All rights reserved.')); ?>
                     </p>
                 </div>
@@ -31,23 +30,26 @@
                 <div style="height: 1px; background-color: rgba(255, 255, 255, 0.1);"></div>
                 
                 <!-- Footer Links -->
-                <div style="display: flex; align-items: center; justify-content: center; gap: 32px; color: hsl(240, 5%, 65%); font-size: 14px; flex-wrap: wrap;">
+                <div style="display: flex; align-items: center; justify-content: center; gap: 32px; color: #a0a0a0; font-size: 14px; flex-wrap: wrap;">
                     <?php
-                    $footer_links = array(
-                        array('text' => get_theme_mod('hentai_saga_footer_privacy_text', 'Privacy Policy'), 'url' => get_theme_mod('hentai_saga_footer_privacy_url', home_url('/privacy-policy/'))),
-                        array('text' => get_theme_mod('hentai_saga_footer_terms_text', 'Terms of Service'), 'url' => get_theme_mod('hentai_saga_footer_terms_url', home_url('/terms-of-service/'))),
-                        array('text' => get_theme_mod('hentai_saga_footer_dmca_text', 'DMCA Copyright Policy'), 'url' => get_theme_mod('hentai_saga_footer_dmca_url', home_url('/dmca-copyright-policy/'))),
-                        array('text' => get_theme_mod('hentai_saga_footer_usc_text', 'USC 2257'), 'url' => get_theme_mod('hentai_saga_footer_usc_url', home_url('/usc-2257/'))),
-                        array('text' => get_theme_mod('hentai_saga_footer_cookies_text', 'Cookie Policy'), 'url' => get_theme_mod('hentai_saga_footer_cookies_url', home_url('/cookie-policy/'))),
-                        array('text' => get_theme_mod('hentai_saga_footer_disclaimer_text', 'Disclaimer'), 'url' => get_theme_mod('hentai_saga_footer_disclaimer_url', home_url('/disclaimer/'))),
-                        array('text' => get_theme_mod('hentai_saga_footer_ads_text', 'Advertisement Policy'), 'url' => get_theme_mod('hentai_saga_footer_ads_url', home_url('/advertisement-policy/'))),
-                        array('text' => get_theme_mod('hentai_saga_footer_age_text', 'Age Restriction Policy'), 'url' => get_theme_mod('hentai_saga_footer_age_url', home_url('/age-restriction-policy/'))),
-                        array('text' => get_theme_mod('hentai_saga_footer_parental_text', 'Parental Controls'), 'url' => get_theme_mod('hentai_saga_footer_parental_url', home_url('/parental-controls/')))
+                    $links = array(
+                        array('key' => 'privacy', 'default' => 'Privacy Policy', 'url_default' => 'privacy-policy'),
+                        array('key' => 'terms', 'default' => 'Terms of Service', 'url_default' => 'terms-of-service'),
+                        array('key' => 'dmca', 'default' => 'DMCA Copyright Policy', 'url_default' => 'dmca-copyright-policy'),
+                        array('key' => 'usc', 'default' => 'USC 2257', 'url_default' => 'usc-2257'),
+                        array('key' => 'cookies', 'default' => 'Cookie Policy', 'url_default' => 'cookie-policy'),
+                        array('key' => 'disclaimer', 'default' => 'Disclaimer', 'url_default' => 'disclaimer'),
+                        array('key' => 'ads', 'default' => 'Advertisement Policy', 'url_default' => 'advertisement-policy'),
+                        array('key' => 'age', 'default' => 'Age Restriction Policy', 'url_default' => 'age-restriction-policy'),
+                        array('key' => 'parental', 'default' => 'Parental Controls', 'url_default' => 'parental-controls'),
                     );
                     
-                    foreach ($footer_links as $link) {
-                        if (!empty($link['text']) && !empty($link['url'])) {
-                            echo '<a href="' . esc_url($link['url']) . '" style="color: hsl(240, 5%, 65%); text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color=\'#ff00ff\'" onmouseout="this.style.color=\'hsl(240, 5%, 65%)\'">'. esc_html($link['text']) . '</a>';
+                    foreach ($links as $link) {
+                        $text = get_theme_mod('hentai_saga_footer_' . $link['key'] . '_text', $link['default']);
+                        $url = get_theme_mod('hentai_saga_footer_' . $link['key'] . '_url', home_url('/' . $link['url_default'] . '/'));
+                        
+                        if (!empty($text) && !empty($url)) {
+                            echo '<a href="' . esc_url($url) . '" style="color: #a0a0a0; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color=\'#ff00ff\'" onmouseout="this.style.color=\'#a0a0a0\'" data-testid="link-' . esc_attr($link['key']) . '">' . esc_html($text) . '</a>';
                         }
                     }
                     ?>
@@ -56,7 +58,7 @@
         </div>
 
         <!-- Mobile Footer -->
-        <div style="display: flex; @media(min-width: 768px) { display: none; } padding: 32px 0; flex-direction: column; align-items: center; gap: 20px;">
+        <div style="display: none; padding: 32px 0; flex-direction: column; align-items: center; gap: 20px;" class="md:hidden">
             <!-- Logo -->
             <div style="display: flex; align-items: center; gap: 8px;">
                 <div style="width: 32px; height: 32px; background-color: #ff00ff; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: white; font-family: 'Orbitron', sans-serif; font-weight: bold; font-size: 18px;">
@@ -68,7 +70,7 @@
             </div>
             
             <!-- Copyright -->
-            <p style="color: hsl(240, 5%, 65%); font-size: 12px;">
+            <p style="color: #a0a0a0; font-size: 12px;">
                 <?php echo esc_html(get_theme_mod('hentai_saga_footer_copyright', '© 2025 Hentai Saga. All rights reserved.')); ?>
             </p>
             
@@ -76,11 +78,14 @@
             <div style="height: 1px; background-color: rgba(255, 255, 255, 0.1); width: 100%;"></div>
             
             <!-- Footer Links Grid -->
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; color: hsl(240, 5%, 65%); font-size: 12px; text-align: center; width: 100%;">
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px 24px; color: #a0a0a0; font-size: 12px; text-align: center; width: 100%;">
                 <?php
-                foreach ($footer_links as $link) {
-                    if (!empty($link['text']) && !empty($link['url'])) {
-                        echo '<a href="' . esc_url($link['url']) . '" style="color: hsl(240, 5%, 65%); text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color=\'#ff00ff\'" onmouseout="this.style.color=\'hsl(240, 5%, 65%)\'">'. esc_html($link['text']) . '</a>';
+                foreach ($links as $link) {
+                    $text = get_theme_mod('hentai_saga_footer_' . $link['key'] . '_text', $link['default']);
+                    $url = get_theme_mod('hentai_saga_footer_' . $link['key'] . '_url', home_url('/' . $link['url_default'] . '/'));
+                    
+                    if (!empty($text) && !empty($url)) {
+                        echo '<a href="' . esc_url($url) . '" style="color: #a0a0a0; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color=\'#ff00ff\'" onmouseout="this.style.color=\'#a0a0a0\'" data-testid="link-' . esc_attr($link['key']) . '-mobile">' . esc_html($text) . '</a>';
                     }
                 }
                 ?>
