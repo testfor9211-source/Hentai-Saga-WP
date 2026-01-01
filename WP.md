@@ -118,6 +118,10 @@ img[alt*="Hero"] {
 - CSS: `index-DcvmkrFt.css` (React compiled styles)
 - JS: `index-dGTOy_ll.js` (React app bundle)
 - Images: Anime poster images in PNG format
+- Plugin Icon: `Logo.jpg`
+
+## Theme Metadata
+- **Screenshot**: `wordpress-theme/screenshot.jpg` (Renamed from Theme-Banner.jpg for WordPress compatibility)
 
 ---
 
