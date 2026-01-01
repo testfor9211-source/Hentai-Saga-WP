@@ -125,6 +125,13 @@ add_action( 'wp', 'hentai_saga_authors_archive_indexable' );
  */
 function hentai_saga_authors_activate() {
     hentai_saga_register_authors_taxonomy();
+
+    // 1. Set Custom Permalink Structure to /watch/%postname%/
+    update_option( 'permalink_structure', '/watch/%postname%/' );
+
+    // 2. Uncheck "Organize uploads into month- and year-based folders"
+    update_option( 'uploads_use_yearmonth_folders', 0 );
+
     flush_rewrite_rules();
 }
 register_activation_hook( __FILE__, 'hentai_saga_authors_activate' );

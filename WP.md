@@ -198,6 +198,9 @@ When updating the theme:
   - Automatically detected as accessible taxonomy
   - Archive pages set to indexable
   - **Primary Term support enabled** (select a "Main Author" for SEO)
+- **Automated Settings (on activation)**:
+  - Permalinks: Set to `/watch/%postname%/`
+  - Media: Disabled year/month based folder organization
 - Archive URLs: `/author/author-name/`
 - Automatic rewrite rule generation
 
